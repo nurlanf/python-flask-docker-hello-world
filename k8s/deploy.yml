@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-flask
+  name: hello-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-flask
+  template:
+    metadata:
+      labels:
+        app: hello-flask
+    spec:
+      containers:
+      - image: nurlanfarajov/hello-flask
+        imagePullPolicy: IfNotPresent
+        name: hello-flask
