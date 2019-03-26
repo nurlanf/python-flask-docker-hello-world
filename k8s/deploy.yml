@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - image: nurlanfarajov/hello-flask
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: hello-flask

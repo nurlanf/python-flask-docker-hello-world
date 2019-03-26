@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Flask inside Docker via Jenkins"
+    return "Flask inside Docker"
 
 
 if __name__ == "__main__":
