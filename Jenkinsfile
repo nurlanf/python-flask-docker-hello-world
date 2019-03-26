@@ -21,8 +21,8 @@ spec:
       path: /var/run/docker.sock
 """
 
-  ) {
- */
+  ) */
+  {
   def label = "docker"
   def image = "nurlanfarajov/hello-flask"
   node(label) {
