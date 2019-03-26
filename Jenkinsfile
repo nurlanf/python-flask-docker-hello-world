@@ -22,7 +22,6 @@ spec:
 """
 
   ) */
-  {
   def label = "docker"
   def image = "nurlanfarajov/hello-flask"
   node(label) {
@@ -39,5 +38,4 @@ spec:
       }
      }
    }
-  }
   }
