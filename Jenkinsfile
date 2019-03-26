@@ -1,6 +1,5 @@
 /**
  * This pipeline will run a Docker image build
- */
 
 def label = "docker-${UUID.randomUUID().toString()}"
 
@@ -21,8 +20,10 @@ spec:
     hostPath:
       path: /var/run/docker.sock
 """
-  ) {
 
+  ) {
+ */
+  def label = "docker"
   def image = "nurlanfarajov/hello-flask"
   node(label) {
     stage('Build Docker image') {
