@@ -26,7 +26,7 @@ spec:
 
   def label = "docker"
   def image = "nurlanfarajov/hello-flask"
-  node(label) {
+  node {
     stage('Build Docker image and Publish') {
       git 'https://github.com/nurlanf/python-flask-docker-hello-world.git'
       container('docker') {
@@ -34,12 +34,10 @@ spec:
       }
     }
     }
-   node(label) {
+   node {
      stage('Publish') {
         withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-          container('docker'){
           sh 'docker push ${image}'
-          }
       }
      }
    }
