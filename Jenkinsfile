@@ -26,19 +26,14 @@ spec:
 
   def label = "docker"
   def image = "nurlanfarajov/hello-flask"
-  pipeline {
-    checkout scm
-
   node(label) {
+    checkout scm
     stage('Build Docker image') {
       sh "docker build -t ${image} ."
       }
-    }
-   node {
-     stage('Publish') {
+    stage('Publish') {
         withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
           sh 'docker push ${image}'
       }
      }
    }
-  }
