@@ -29,7 +29,9 @@ spec:
   node(label) {
     checkout scm
     stage('Build Docker image') {
+      container(docker){
       sh "docker build -t ${image} ."
+      }
       }
     stage('Publish') {
         withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
