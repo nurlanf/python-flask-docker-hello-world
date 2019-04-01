@@ -29,10 +29,8 @@ spec:
   node {
     stage('Build Docker image and Publish') {
       git 'https://github.com/nurlanf/python-flask-docker-hello-world.git'
-      container('docker') {
-        sh "docker build -t ${image} ."
+      sh "docker build -t ${image} ."
       }
-    }
     }
    node {
      stage('Publish') {
