@@ -26,9 +26,11 @@ spec:
 
   def label = "docker"
   def image = "nurlanfarajov/hello-flask"
-  node {
-    stage('Build Docker image and Publish') {
-      git 'https://github.com/nurlanf/python-flask-docker-hello-world.git'
+  pipeline {
+    checkout scm
+
+  node(label) {
+    stage('Build Docker image') {
       sh "docker build -t ${image} ."
       }
     }
@@ -39,3 +41,4 @@ spec:
       }
      }
    }
+  }
