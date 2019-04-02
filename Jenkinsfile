@@ -1,41 +1,19 @@
-/**
- * This pipeline will run a Docker image build
+def image = "nurlanfarajov/hello-flask:${BUILD_NUMBER}"
 
-def label = "docker-${UUID.randomUUID().toString()}"
-
-podTemplate(label: label, yaml: """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: docker
-    image: docker:1.11
-    command: ['cat']
-    tty: true
-    volumeMounts:
-    - name: dockersock
-      mountPath: /var/run/docker.sock
-  volumes:
-  - name: dockersock
-    hostPath:
-      path: /var/run/docker.sock
-"""
-
-  ) */
-
-
-  def label = "docker"
-  def image = "nurlanfarajov/hello-flask"
-  node(label) {
-    checkout scm
-    stage('Build Docker image') {
-      container(docker){
-      sh "docker build -t ${image} ."
+pipeline {
+  agent {
+    kubernetes {
+      label 'docker'
+      yamlFile 'k8s/docker-pod.yml'
+    }
+  }
+  stages {
+    stage('Build') {
+      steps {
+        container('docker') {
+          sh 'docker build -t ${image} .'
+        }
       }
-      }
-    stage('Publish') {
-        withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-          sh 'docker push ${image}'
-      }
-     }
-   }
+    }
+  }
+}
