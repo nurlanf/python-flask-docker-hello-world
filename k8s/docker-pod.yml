@@ -13,9 +13,6 @@ spec:
     volumeMounts:
     - name: dockersock
       mountPath: /var/run/docker.sock
-    env:
-    - name: DOCKER_OPTS
-      value: "-H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock"
   volumes:
   - name: dockersock
     hostPath:
