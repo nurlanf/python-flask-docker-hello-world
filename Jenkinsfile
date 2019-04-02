@@ -22,7 +22,7 @@ spec:
   def image = "nurlanfarajov/hello-flask:${BUILD_NUMBER}"
   node(label) {
     stage('Build Docker image') {
-      git 'https://github.com/nurlanf/hello-flask.git'
+      git 'https://github.com/nurlanf/python-flask-docker-hello-world.git'
       container('docker') {
         sh "docker build -t ${image} ."
       }
